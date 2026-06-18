@@ -18,9 +18,22 @@ A skill is a folder with a `SKILL.md` (instructions + a `description` that tells
 
 ## Install
 
-These are plain skill folders. To use one, copy it into your skills directory:
+These are plain skill folders — no build step, no plugin manager required.
 
-- **Claude Code (CLI):** copy the folder into `~/.claude/skills/` (global) or `.claude/skills/` (per-project)
+**Grab the whole set:**
+
+```bash
+git clone https://github.com/tiobenito/skills.git
+cp -r skills/{visualization,cc-level-up,skill-template,idea-eval,project-roadmap} ~/.claude/skills/
+```
+
+**Grab just one:**
+
+```bash
+cp -r skills/visualization ~/.claude/skills/
+```
+
+- **Claude Code (CLI):** copy a skill folder into `~/.claude/skills/` (global) or `.claude/skills/` (per-project)
 - **claude.ai Projects:** add the skill folder to your project files
 
 Then start a conversation and trigger it with one of the phrases above.
