@@ -1,6 +1,6 @@
 ---
 name: idea-eval
-description: "Idea evaluation pipeline — score, persist, and manage business ideas with a weighted 8-criteria rubric. Use when someone says 'validate this idea', 'score this idea', 'evaluate this idea', 'list ideas', 'view an idea', 'submit idea', 'add note', or presents a business idea to score. Supports listing, viewing, submitting, adding notes, quick scoring, deep framework analysis, and re-evaluation. Persistence is configurable (local files by default; optionally a GitHub repo). For general-purpose framework analysis without scoring/persistence, use idea-pressure-tester instead."
+description: "Idea evaluation pipeline — score, persist, and manage business ideas with a weighted 8-criteria rubric. Use when someone says 'validate this idea', 'score this idea', 'evaluate this idea', 'list ideas', 'view an idea', 'submit idea', 'add note', or presents a business idea to score. Supports listing, viewing, submitting, adding notes, quick scoring, deep framework analysis, and re-evaluation. Persistence is configurable (local files by default; optionally a GitHub repo). For open-ended framework analysis without scoring or persistence, a general idea-brainstorming skill is a better fit."
 ---
 
 # Idea Evaluator
