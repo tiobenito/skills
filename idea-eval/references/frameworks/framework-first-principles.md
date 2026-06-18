@@ -1,36 +1,23 @@
-# First Principles Thinking
+# First Principles
 
-## Purpose
-Break down complex ideas to fundamental truths and rebuild from scratch, removing assumptions and borrowed thinking.
+**What it is:** Strip the idea down to the things you know are fundamentally true, then rebuild your reasoning from those facts — instead of arguing from analogy ("it's like X for Y") or convention.
 
-## When to Use
-- Testing whether you're copying competitors vs. innovating
-- Validating ideas in new or uncertain markets
-- When the idea feels derivative or "me too"
-- Refining business models or GTM strategies
+**Best for:** Ideas that feel derivative, or where "that's just how it's done" is doing too much of the work.
 
-## Process
+## Running it
 
-1. **Identify the core belief**
-   - What fundamental assumption is your idea built on?
+1. Write down what the idea assumes to be true. Separate the items that are genuinely fundamental (physics, economics, verified user behavior) from the ones that are just convention or copied from competitors.
+2. Discard the conventions. Keep only the bedrock facts.
+3. Rebuild a solution from those facts alone. Ask: if we started from scratch knowing only what's actually true, what would we build?
+4. Compare that fresh build to the original idea.
 
-2. **Break it down**
-   - What are you assuming must be true for this to work?
-   - List every assumption (market, customer behavior, technology, economics)
+## What to pull out
 
-3. **Question each assumption**
-   - Is this actually true, or is it industry conventional wisdom?
-   - What evidence supports or contradicts this?
-   - Has this always been true, or did circumstances change?
+- Which of the idea's assumptions are real vs. inherited.
+- A from-scratch version of the solution and how it differs.
+- Any unfair advantage that only shows up once conventions are dropped.
 
-4. **Identify fundamental truths**
-   - What MUST be true (physics, human nature, economics)?
-   - What is merely true today (technology, regulation, market conditions)?
+## Watch for
 
-5. **Rebuild from fundamentals**
-   - Given only the fundamental truths, what solutions are possible?
-   - How does this compare to your original idea?
-
-6. **Synthesis**
-   - Is your idea built on fundamentals or assumptions?
-   - What would change if you rebuilt from first principles?
+- Calling something "fundamental" when it's just a strong habit.
+- Rebuilding all the way back to the same answer without testing whether you had to.

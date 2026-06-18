@@ -1,43 +1,24 @@
-# 5 Whys Method
+# Five Whys
 
-## Purpose
-Identify root causes by repeatedly asking "why" to move beyond symptoms to underlying problems.
+**What it is:** A root-cause technique — take the problem your idea claims to solve and ask "why does that happen?" repeatedly (roughly five times) until you hit the underlying cause rather than a surface symptom.
 
-## When to Use
-- Identifying blind spots in problem understanding
-- Validating whether you're solving the right problem
-- When the idea seems reactive rather than strategic
+**Best for:** Checking whether an idea solves a real root problem or just treats a symptom.
 
-## Process
+## Running it
 
-1. **State the idea/problem clearly**
-   - "We want to [idea/solution]"
+1. State the problem the idea addresses in one plain sentence.
+2. Ask "why does this problem exist?" Write the answer.
+3. Take that answer and ask "why?" again. Repeat until the answers stop being useful — usually three to five rounds.
+4. The last answer that's still actionable is the real problem worth solving.
 
-2. **Ask Why #1**: Why do you want to do this?
-   - Listen for the immediate reason
+## What to pull out
 
-3. **Ask Why #2**: Why is [previous answer] important?
-   - Dig one level deeper
+- The true root problem (often different from the stated one).
+- Whether the idea actually addresses that root, or stops at a symptom.
+- A sharper problem statement to feed back into the brief.
 
-4. **Ask Why #3**: Why does [previous answer] matter?
-   - Move toward underlying needs
+## Watch for
 
-5. **Ask Why #4**: Why is [previous answer] critical?
-   - Approach fundamental drivers
-
-6. **Ask Why #5**: Why does [previous answer] create value?
-   - Reach root cause/opportunity
-
-7. **Synthesis**: Is the original idea still the best solution to address the root cause?
-
-## Example
-
-**Idea**: "We want to build an AI chatbot for customer support"
-
-- **Why #1**: To reduce support ticket volume
-- **Why #2**: Because our team is overwhelmed with repetitive questions
-- **Why #3**: Because customers can't find answers in our documentation
-- **Why #4**: Because our documentation is scattered across multiple platforms
-- **Why #5**: Because we've never had a unified knowledge management strategy
-
-**Insight**: The real opportunity isn't a chatbot—it's knowledge architecture. A chatbot might help, but fixing the root cause (knowledge management) could unlock multiple solutions.
+- Jumping to a cause you already believe — let each "why" be answered honestly.
+- Confusing a chain of symptoms for a chain of causes.
+- Stopping too early (still at a symptom) or going too deep (into causes nobody can act on).

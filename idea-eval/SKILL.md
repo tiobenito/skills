@@ -223,23 +223,28 @@ After saving: "Note added to <idea name>. It now has <N> notes total."
 
 ## Deep Mode: Framework Analysis
 
-Use the 9 innovation frameworks in `references/frameworks/` for thorough analysis.
+Instead of scoring, work the idea over with one or more structured frameworks. Nine are bundled
+in `references/frameworks/` — each is a short, self-contained method file.
 
 ### Process
 
-1. **Discovery**: Ask questions to understand the idea, goal, and stage
-2. **Framework Selection**: Recommend 1-3 frameworks
+1. **Frame it.** Get the idea in a sentence, then ask two things: what does the user most want out of this pass (decide go/no-go, find blind spots, sharpen it, or test a specific assumption), and how far along are they (raw concept, some validation, or about to commit)? Keep it conversational — don't interrogate.
 
-**Selection Matrix:**
-- Validate worth pursuing → 5 Whys, JTBD, or Assumption Testing
-- Identify blind spots → Pre-mortem, Fishbone
-- Refine to make actionable → Pareto, Design Thinking
-- Test core assumptions → Assumption Testing + First Principles
-- New venture (comprehensive) → Pre-mortem + Assumption Testing + JTBD
+2. **Pick the right tool(s)** for what they're after — usually one to three:
 
-3. **Apply Framework**: Load from `references/frameworks/` and follow conversationally
-4. **Synthesize**: Key insights, validated/invalidated assumptions, next steps
-5. **Offer to Score**: "Want me to run the scoring pipeline on this now?"
+   | If they want to… | Reach for |
+   |---|---|
+   | Make sure it solves a real problem | **Five Whys**, **JTBD** |
+   | Find what could go wrong | **Pre-mortem**, **Fishbone** |
+   | Know what to validate first | **Assumption Testing** |
+   | Check the value actually lands | **Value Proposition Canvas** |
+   | Cut scope / find the core | **Pareto** |
+   | Question a derivative idea | **First Principles** |
+   | Refine a user-facing experience | **Design Thinking** |
+
+3. **Run it.** Load the chosen file from `references/frameworks/` and walk it conversationally.
+4. **Synthesize** — key insights, which assumptions held or broke, concrete next steps.
+5. **Offer to score** — "Want me to run the scoring pipeline on this now?"
 
 **Framework files** (in `references/frameworks/`): framework-five-whys, framework-first-principles, framework-pre-mortem, framework-jtbd, framework-assumption-testing, framework-value-proposition-canvas, framework-fishbone, framework-pareto, framework-design-thinking.
 

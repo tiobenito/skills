@@ -1,41 +1,23 @@
-# Pareto Analysis (80/20 Rule)
+# Pareto (80/20)
 
-## Purpose
-Identify the vital few factors that drive the majority of results, helping you focus effort where it matters most.
+**What it is:** For most outcomes, a small share of inputs drives most of the result. Use it to find the "vital few" parts of an idea worth focusing on and cut or defer the rest.
 
-## When to Use
-- Refining ideas to focus on highest-impact elements
-- GTM strategy (which channels, messages, or segments matter most)
-- Resource allocation decisions
-- When the idea tries to do too much
+**Best for:** Ideas that try to do too much, or unclear priorities.
 
-## Process
+## Running it
 
-1. **List all factors/components**
-   - Break down your idea into discrete elements (features, segments, channels, use cases)
+1. List everything the idea includes — features, segments, channels, use cases.
+2. For each, estimate its share of the value (impact, revenue, users reached).
+3. Sort by value and find the cut point where a small set covers most of the upside.
+4. Make the vital few the v1. Everything below the line becomes "later," not "never" — but it's explicitly deferred.
 
-2. **Estimate impact for each**
-   - Define "impact" based on your goal (revenue potential, customer value, adoption likelihood)
-   - Assign impact score (1-10)
+## What to pull out
 
-3. **Estimate effort/cost for each**
-   - Resources required (time, money, complexity)
-   - Assign effort score (1-10)
+- The 20% of scope that delivers ~80% of the value — the real MVP.
+- What to cut or defer without hurting the core.
+- A focused first version instead of a sprawling one.
 
-4. **Calculate impact-to-effort ratio**
-   - Impact / Effort = Efficiency score
+## Watch for
 
-5. **Categorize**
-   - **Quick wins**: High impact, low effort (do first)
-   - **Major projects**: High impact, high effort (strategic priorities)
-   - **Fill-ins**: Low impact, low effort (do if time permits)
-   - **Money pits**: Low impact, high effort (avoid)
-
-6. **Identify the vital 20%**
-   - Which 20% of factors drive 80% of results?
-
-7. **Synthesis**
-   - What are your vital few?
-   - What can you eliminate or defer?
-   - Is your idea overly complex?
-   - Where should you focus first?
+- Treating the split as exact math — it's a lens, not a measurement.
+- Keeping a pet feature that's clearly below the line.

@@ -1,54 +1,23 @@
 # Assumption Testing
 
-## Purpose
-Identify and validate critical assumptions your idea depends on, separating what you know from what you believe.
+**What it is:** Make the idea's hidden bets explicit, find the ones that are both most uncertain and most fatal-if-wrong, and design the cheapest test that could prove each one false.
 
-## When to Use
-- Validating new business ideas before investment
-- Refining GTM strategies
-- When the idea has many unknowns
-- Before making resource commitments
+**Best for:** Deciding what to validate first before building anything.
 
-## Process
+## Running it
 
-1. **Brain dump all assumptions**
-   - List everything you believe to be true about:
-     - Customers (who they are, what they want, willingness to pay)
-     - Market (size, growth, competition)
-     - Execution (your ability, resources, timeline)
-     - Business model (how you make money, unit economics)
+1. List every assumption the idea depends on — about demand, willingness to pay, the channel, the cost to build/operate, user behavior.
+2. Plot each on two axes: how confident are you it's true, and how badly does the idea break if it's false?
+3. The riskiest assumptions are low-confidence and high-impact. Start there.
+4. For each, write the smallest, fastest test that could disprove it (a landing page, ten customer conversations, a pre-sale, a manual concierge run). Decide what result would kill the idea.
 
-2. **Categorize assumptions**
-   - **Known**: Evidence-based facts
-   - **Assumed**: Unvalidated beliefs
-   - **Unknown**: Things you don't know yet
+## What to pull out
 
-3. **Prioritize by risk**
-   - **Critical assumptions**: If wrong, the idea fails
-   - **Important assumptions**: If wrong, major pivot needed
-   - **Minor assumptions**: If wrong, adjust and continue
-   - Focus on critical assumptions first
+- The one or two assumptions that most deserve a test before any building.
+- A concrete, cheap test for each, with a clear pass/fail bar.
+- Which assumptions, if false, are dealbreakers.
 
-4. **Assess validation difficulty**
-   - **Easy to test**: Can validate in days/weeks with low cost
-   - **Moderate to test**: Requires some time/resources
-   - **Hard to test**: Expensive or time-intensive to validate
+## Watch for
 
-5. **Design minimum tests**
-   - For each critical assumption, create the smallest test:
-     - Customer interviews (5-10 target customers)
-     - Landing page with ad spend ($100-500)
-     - Prototype demonstration
-     - Pre-sales/letters of intent
-   - What specific evidence would confirm or reject?
-
-6. **Set decision criteria**
-   - What result means "proceed"?
-   - What result means "pivot"?
-   - What result means "kill the idea"?
-
-7. **Synthesis**
-   - Which critical assumptions were validated?
-   - Which were invalidated?
-   - What pivots are needed?
-   - Is the idea still viable?
+- Testing the comfortable assumptions instead of the scary ones.
+- Vague tests with no failure condition — "we'll see if people like it."

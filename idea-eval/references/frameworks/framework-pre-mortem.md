@@ -1,42 +1,23 @@
-# Pre-mortem Analysis
+# Pre-mortem
 
-## Purpose
-Imagine the idea has failed spectacularly. Work backward to identify what went wrong, surfacing risks and blind spots before they become reality.
+**What it is:** Imagine it's a year from now and the idea has clearly failed. Working backward from that failure, list everything that plausibly caused it — before you've committed resources.
 
-## When to Use
-- Identifying blind spots and hidden risks
-- Validating high-stakes business ideas or GTM strategies
-- When team/stakeholders are overly optimistic
-- Before committing significant resources
+**Best for:** Surfacing risks and blind spots while they're still cheap to address.
 
-## Process
+## Running it
 
-1. **Set the scene**
-   - "It's 12 months from now. We launched this idea and it failed completely. What happened?"
+1. Set the scene: "It's [a year out]. We built this and it flopped." Make the failure vivid and assumed, not hypothetical.
+2. Brainstorm every reason it could have failed — demand, execution, competition, cost, timing, team, distribution. Quantity first.
+3. Group the causes and rank them by likelihood × impact.
+4. For the top few, decide: can we de-risk it now, design around it, or is it a reason not to proceed?
 
-2. **Generate failure scenarios** (aim for 5-10)
-   - Brainstorm every plausible reason for failure
-   - Consider: market, execution, timing, competition, resources, team, assumptions
+## What to pull out
 
-3. **Prioritize by likelihood + impact**
-   - Which failures are most likely?
-   - Which would be most damaging?
-   - Focus on high-likelihood OR high-impact scenarios
+- The two or three failure modes most likely to actually sink it.
+- Concrete mitigations for each, or a clear-eyed "this is a dealbreaker."
+- Early warning signs to watch for.
 
-4. **Root cause analysis for top failures**
-   - For each priority failure: What would cause this?
-   - Trace back to decisions, assumptions, or conditions
+## Watch for
 
-5. **Identify early warning signals**
-   - How would you know this failure is beginning?
-   - What metrics or indicators would show trouble?
-
-6. **Build mitigation strategies**
-   - How could you prevent this failure?
-   - How could you detect it early?
-   - What's your contingency plan?
-
-7. **Synthesis**
-   - Which risks can you eliminate by redesigning the idea?
-   - Which risks require monitoring and contingency plans?
-   - Is the idea still worth pursuing given the risks?
+- Polite optimism — the exercise only works if people genuinely imagine failure.
+- Listing risks without ranking them, so everything feels equally urgent.

@@ -1,39 +1,23 @@
-# Fishbone Diagram (Ishikawa)
+# Fishbone (Cause-and-Effect)
 
-## Purpose
-Systematically identify all potential causes of a problem or all factors contributing to an outcome, organized by category.
+**What it is:** A structured way to map all the contributing causes behind a problem or outcome, grouped into categories, so you don't fixate on a single explanation. (Also called an Ishikawa diagram.)
 
-## When to Use
-- Identifying blind spots in complex ideas
-- When the idea addresses a problem (need to understand root causes)
-- Validating that your solution addresses all critical factors
-- Refining GTM or implementation strategies
+**Best for:** Complex problems with many moving parts, where the real cause is tangled.
 
-## Process
+## Running it
 
-1. **Define the "effect"**
-   - What problem are you solving OR what outcome are you creating?
+1. Write the effect (the problem the idea targets, or "why won't this work") as the head of the fish.
+2. Pick a handful of cause categories that fit the domain — e.g. People, Process, Product, Price, Promotion, Place; or your own.
+3. Under each category, brainstorm the specific causes that contribute to the effect. Push for several per category.
+4. Review the whole map and circle the causes that are both high-impact and addressable by the idea.
 
-2. **Identify major categories** (choose relevant ones)
-   - Standard: People, Process, Technology, Environment, Materials, Measurement
-   - Business: Market, Product, Distribution, Marketing, Operations, Team
-   - GTM: Messaging, Channels, Pricing, Positioning, Competition, Timing
+## What to pull out
 
-3. **Brainstorm causes within each category**
-   - For each category, list all factors that contribute
-   - Push for specific, actionable factors (not vague generalities)
-   - Aim for 3-7 factors per category
+- A complete map of contributing causes, not just the obvious one.
+- The few causes the idea can actually move.
+- Causes outside your control that become risks or constraints.
 
-4. **Drill deeper with "why?"**
-   - For major factors, ask "Why does this happen?"
-   - Create sub-branches for root causes
+## Watch for
 
-5. **Identify patterns and priorities**
-   - Which causes appear across multiple categories?
-   - Which have the biggest impact?
-   - Which are within your control?
-
-6. **Synthesis**
-   - Does your idea address the high-impact causes?
-   - What blind spots were revealed?
-   - What factors need more attention?
+- Forcing causes into categories where they don't belong.
+- Stopping at one cause per branch — the value is in breadth.

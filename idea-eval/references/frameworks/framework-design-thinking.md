@@ -1,51 +1,24 @@
 # Design Thinking
 
-## Purpose
-Human-centered approach to innovation that emphasizes empathy, experimentation, and iteration.
+**What it is:** A user-centered loop — understand the user deeply, define the real problem, generate many solutions, build a rough version, and test it — iterating rather than committing to the first idea.
 
-## When to Use
-- Validating customer-facing ideas (products, services, experiences)
-- Refining offers or GTM strategies
-- When the idea feels solution-focused vs. problem-focused
-- Need to make the idea more actionable
+**Best for:** Customer-facing ideas where the user experience is central and the problem isn't fully understood yet.
 
-## Process
+## Running it
 
-### 1. Empathize
-- Who is this for? (Be specific)
-- What's their daily context, constraints, pressures?
-- What do they struggle with?
-- What do they say vs. what do they actually do?
+1. **Empathize** — get into the user's actual experience: what they do, feel, and struggle with. Talk to them or imagine concretely; don't design from assumptions.
+2. **Define** — restate the problem from the user's point of view in one sentence. This is the problem you'll solve, not the one you started with.
+3. **Ideate** — generate many possible solutions, including bad ones, before judging. Quantity unlocks the non-obvious.
+4. **Prototype** — build the cheapest possible version that makes the idea testable (a sketch, a clickable mock, a manual run-through).
+5. **Test** — put it in front of users, watch what actually happens, and feed what you learn back into the loop.
 
-### 2. Define
-- Synthesize insights into problem statement
-- Format: "[User] needs [need] because [insight]"
-- Must be problem-focused, human-centered, specific, evidence-based
+## What to pull out
 
-### 3. Ideate
-- Diverge: Generate many ideas without judgment (10+)
-- Use "How might we..." prompts
-- Then converge: Group similar ideas, select 2-3 to prototype
+- A user-grounded problem statement.
+- A few candidate solutions, not just the first one.
+- A cheap prototype and what testing it would teach you.
 
-### 4. Prototype
-- Create minimum viable version for testing
-- Fast to create (hours/days, not weeks)
-- Cheap to build
-- Good enough to get real feedback
-- Tests specific hypotheses
+## Watch for
 
-### 5. Test
-- Show prototype to 5-10 target users
-- Observe behavior (not just what they say)
-- Look for moments of delight or frustration
-- Ask: "Would you pay for this? How much?"
-
-### 6. Iterate
-- What worked? (Keep and amplify)
-- What didn't? (Change or remove)
-- What surprised you? (Explore further)
-
-**Decision points:**
-- Proceed: Strong validation, minor refinements
-- Pivot: Some validation, different direction needed
-- Kill: No validation, fundamental assumptions wrong
+- Skipping straight to a solution before understanding the user.
+- Treating it as a one-time sequence instead of a loop.
