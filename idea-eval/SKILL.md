@@ -7,14 +7,28 @@ description: "Idea evaluation pipeline — score, persist, and manage business i
 
 Evaluates business ideas through a structured pipeline, scores them on 8 weighted criteria, and persists results so you can track and revisit them over time.
 
-## Setup — configure persistence (first run)
+## Setup — build your profile (first run)
 
-This skill stores evaluated ideas somewhere. Pick one of these and tell the user which is in effect:
+The whole rubric scores ideas **against you** — your constraints, your goals, your team. So
+before the first evaluation, the skill needs that context. Read `references/profile.md`. If it
+still has the blank `<placeholder>` fields, run a short onboarding interview, then save the
+answers back into `references/profile.md` so you never have to ask again. On later runs, just
+load the profile — only re-interview if the user says their situation changed.
+
+**The onboarding interview (batch these, don't ask one at a time):**
+
+1. **Constraints** — How much time can you put in each week? Bootstrapping or do you have a budget? Side project or heading toward full-time? Anything off the table?
+2. **Goals** — What do you want out of this — passive income, a real company, learning, a portfolio piece? What revenue shape, timeline, and risk appetite?
+3. **Team** — Who's building this? For each person (or just yourself): their superpowers, the domains they know, and any audience or network edge. If solo, say so.
+
+Write the answers into `references/profile.md` under Constraints / Goals / Team. Confirm the filled-in profile with the user before scoring. Use the AskUserQuestion tool where options are knowable; free-text otherwise.
+
+## Setup — where ideas are stored
+
+Pick one and tell the user which is in effect:
 
 - **Local files (default)** — write to `./ideas/<slug>/` in the current project (or a path the user names). Zero dependencies; works everywhere.
 - **GitHub repo (optional)** — if the user wants ideas synced/shared, ask for a repo (`<your-org>/ideas`) and write under a `database/` prefix there. Use whatever GitHub tooling the user has configured for that account.
-
-A `references/team-bios.md` file (used when scoring **Team Fit**) describes who would build these ideas. It ships as a fill-in template — **the user customizes it with their own team's skills and constraints before first use.** If it's still the template, ask the user about their team, or score Team Fit on stated info only.
 
 ## Modes
 
@@ -66,7 +80,7 @@ Push the thinking — don't just validate.
 
 Read `references/pipeline/03-thesis-fit.md` for detailed scoring guidelines.
 
-Score on 8 criteria (1-5 each). Reference `references/team-bios.md` when scoring Team Fit.
+Score on 8 criteria (1-5 each). Reference `references/profile.md` (your saved team + constraints + goals) when scoring.
 
 **Criteria & Weights:**
 | Criterion | Weight |
@@ -285,7 +299,7 @@ This rubric is tuned for a small team building AI-powered side projects: a few p
 
 **Key principle:** for the SMB track, the relationship is the moat, not any single product.
 
-Customize `references/team-bios.md` to reflect your own team — it drives the Team Fit score.
+Your `references/profile.md` (built during onboarding) drives the Team Fit score — keep it current.
 
 ---
 

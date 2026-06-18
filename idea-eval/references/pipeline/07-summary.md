@@ -8,7 +8,7 @@ Write a concise executive summary covering:
 2. **Top 3 strengths**: What makes this idea compelling
 3. **Top 3 concerns**: What could sink it
 4. **Recommended next steps**: 3-5 specific, actionable steps (not vague advice)
-5. **Team lead recommendation**: Who on the team should lead this and why (reference team bios)
+5. **Team lead recommendation**: Who on the team should lead this and why (reference references/profile.md)
 
 ## Persistence
 

@@ -9,8 +9,8 @@ repo root (GitHub Pages serves it at `<owner>.github.io/<repo>/<name>-guide.html
 
 ## Part 1 — Teaching preamble (optional)
 
-Include this only when the audience is new to skills — primarily the public target. Skip it
-for personal targets where the recipient already knows what a skill is.
+Include this only when the audience is new to skills. Skip it when the recipient already
+knows what a skill is.
 
 Keep it short and general (not skill-specific):
 - **What is a skill** — a folder of instructions Claude loads on demand.
@@ -36,6 +36,6 @@ Keep it short and general (not skill-specific):
 
 ## Style
 
-- Defer all visual design to `visualization` and the target's design system.
+- Defer all visual design to `visualization` and a neutral design system.
 - One idea per slide; visual-first; short text. (`visualization` enforces this — let it.)
 - The worked example is the most important slide. Make it concrete and specific.

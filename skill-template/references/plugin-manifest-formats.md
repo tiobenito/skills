@@ -2,7 +2,7 @@
 
 The packaging layer. A Claude Code plugin marketplace is a git repo; each installable
 skill is a *plugin* inside it. This file documents the file shapes and the staging
-sequence. Repo paths and the GitHub account come from the chosen target file.
+sequence. Repo paths and the GitHub account come from where the user chose to publish (SKILL.md Step 4).
 
 ## Repo layout
 
@@ -34,8 +34,8 @@ sequence. Repo paths and the GitHub account come from the chosen target file.
   "name": "<name>",
   "description": "One-line description. Match the marketplace.json entry.",
   "version": "1.0.0",
-  "author": { "name": "<author from target file>" },
-  "homepage": "<repo homepage URL from target file>",
+  "author": { "name": "<your name or handle>" },
+  "homepage": "<repo homepage URL>",
   "license": "MIT",
   "keywords": ["<3-6 keywords>"],
   "skills": "./skills"
@@ -85,7 +85,7 @@ sequence moves it into the marketplace repo.
 
    `--strict` fails on unrecognized fields and missing metadata. Fix and re-run until clean.
 7. Commit to the branch. Show the user `git diff --stat` and the exact push command for
-   that target's account. **Stop — do not push.**
+   the destination account. **Stop — do not push.**
 8. Print the install commands for the post-push smoke test:
    ```
    /plugin marketplace add <owner>/<repo>      # first time only

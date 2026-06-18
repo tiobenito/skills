@@ -1,14 +1,21 @@
 ---
-name: roadmap-dashboard
-description: Build a living, single-page roadmap/program dashboard for a project by pointing at its folder, harvesting existing docs (STATUS, roadmap, TASKS, DECISIONS, etc.), inferring a draft structure, adaptively prompting for gaps, then rendering a self-contained HTML dashboard + a state.md source-of-truth you can host anywhere. Use when someone says "build a roadmap dashboard", "make a program dashboard", "turn my project into a dashboard", "create a living roadmap", "dashboard for my project", or wants a visual project roadmap (stages, steps, status, and owners) synced to a repo instead of a static text plan. Also use to refresh/update an existing such dashboard. NOT for daily task dashboards, BI/metrics dashboards from a data pipeline, or deployed web apps.
+name: project-roadmap
+description: Point it at a project folder and it builds a living, single-page roadmap dashboard — it harvests the folder's existing docs (STATUS, roadmap, TASKS, DECISIONS, README, etc.), infers a draft structure (stages, steps, status, owners, north star), asks you only about real gaps, then renders a self-contained HTML dashboard + a state.md source-of-truth you can host anywhere. Use when someone says "build a roadmap", "make a project roadmap", "turn my project into a dashboard", "create a living roadmap", "roadmap for my project", or wants a visual project roadmap synced to a repo instead of a static text plan. Also use to refresh/update an existing roadmap. NOT for daily task dashboards, BI/metrics dashboards from a data pipeline, or deployed web apps.
 argument-hint: "[project folder or name]"
 ---
 
-# Roadmap Dashboard
+# Project Roadmap
 
-Builds the kind of living program dashboard that beats a static text plan: a North Star metric,
-a row of stage tiles, and per-stage Plan/Details panels showing each step's status and owner —
-synced to a project folder and hosted at a stable URL the team can revisit.
+**Point it at a project folder and it works.** Give it a path (or a project name), and it reads
+what's already there — STATUS, roadmap, TASKS, DECISIONS, README, git log — infers a draft
+roadmap, asks you only about the genuine gaps, and renders a living dashboard that beats a static
+text plan: a North Star metric, a row of stage tiles, and per-stage Plan/Details panels showing
+each step's status and owner — synced to the folder and hosted at a stable URL the team can revisit.
+
+The point of pointing it at a folder: you don't fill in a blank template. The skill harvests the
+docs you already maintain and only interviews you for what's actually missing (usually a couple of
+owners and the north-star targets). A folder with a decent STATUS.md and roadmap becomes a
+dashboard in 2-3 questions.
 
 ## What makes this good (don't lose it)
 

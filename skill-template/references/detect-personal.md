@@ -15,11 +15,12 @@ approves the file or adjusts specific items, then move to the next file.
 
 ## What to scan for
 
-The proposed replacement depends on the target's strip policy (see the target file).
-Two columns below: **always-strip** applies to every target; **target-dependent** is
-governed by the target's strip policy.
+The goal is a skill a stranger can install and use. Strip everything tied to you, your
+company, or your machine, and replace hardcoded brand with a fill-in template. Two tiers:
+**always strip** (never ship, no exceptions) and **genericize** (replace with a neutral
+equivalent so the skill still works).
 
-### Always strip — every target, no exceptions
+### Always strip — no exceptions
 
 | Category | Flags | Replacement |
 |---|---|---|
@@ -28,18 +29,19 @@ governed by the target's strip policy.
 | Absolute personal paths | `/Users/<name>/...`, home-relative project paths | Relative path, or a `{placeholder}` the user fills in. |
 | Machine-specific config | Hardcoded config dirs, local hostnames, `~/.config/...` paths | `{placeholder}` or a setup instruction. |
 
-### Target-dependent — governed by the target's strip policy
+### Genericize — replace with a neutral equivalent
 
-| Category | Flags | Public (full strip) | Personal (minimal) |
-|---|---|---|---|
-| Personal names | Real people, contacts | Generic role ("the user", "your team") | Keep |
-| Company / brand names | Employer or product names | Strip — make generic | Keep |
-| Brand / design | Hardcoded hex palettes, fonts, logos | Convert to a fill-in template file (`design-system.md` pattern) | Keep |
-| Work-specific examples | Sample content tied to a real ticket, deal, or workflow | Replace with a generic illustrative example | Keep |
-| Environment references | MCP tools / CLIs that won't exist for the recipient (internal tools, custom rake tasks) | Flag — note as a dependency or remove the dependent feature | Keep |
+| Category | Flags | Replacement |
+|---|---|---|
+| Personal names | Real people, contacts | Generic role ("the user", "your team") |
+| Company / brand names | Employer or product names | Strip — make generic |
+| Brand / design | Hardcoded hex palettes, fonts, logos | Convert to a fill-in template file (`design-system.md` pattern) |
+| Work-specific examples | Sample content tied to a real ticket, deal, or workflow | Replace with a generic illustrative example |
+| Environment references | MCP tools / CLIs that won't exist for the recipient (internal tools, custom rake tasks) | Flag — note as a dependency or remove the dependent feature |
 
-When in doubt about a target-dependent item, ask. Never guess on something that could
-leak private or work-internal content into a public skill.
+When in doubt, ask. Never guess on something that could leak private or work-internal
+content. (If the user says this skill is just for their own use and won't be shared, they
+may keep names and context — but secrets are still always stripped.)
 
 ## The `design-system.md` template pattern
 
