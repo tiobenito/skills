@@ -1,63 +1,103 @@
 # Level-Up Progression Guide
 
-This is the full progression path for a Claude setup. Each level builds on the last.
+The full progression path for a Claude setup — on any platform (Claude Code CLI, the desktop app,
+claude.ai, or other agent tools). Progress is measured across **five dimensions**; your **level** is
+how far you've climbed across them, with Instructions and Organization as the floor and Knowledge &
+Memory as the ceiling.
 
 ---
 
-## Level 0 — Getting Started
+## The five dimensions
 
-**You have:** Course folders (inbox/processed/outputs/reference), maybe 1 skill, no CLAUDE.md.
+Each is scored `absent · basic · solid · advanced`.
 
-**What you'll learn:** Project instructions — a file called CLAUDE.md that tells Claude who you are, what you do, and how you like things done. This is the single highest-impact thing you can set up. It means Claude remembers your preferences every time you start a conversation.
+### 1. Instructions (foundational)
+The instructions file Claude loads every session — `CLAUDE.md`, `AGENTS.md`, or "project
+instructions" depending on your platform.
+- **basic:** a role description (who you are, what you do)
+- **solid:** behavioral rules — "always/never" instructions, format and tone preferences, workflow rules
+- **advanced:** scoped / subfolder instructions for different areas of work
 
-**What gets built:** A starter CLAUDE.md (10-15 lines) and 1 role-specific skill.
+### 2. Organization (foundational)
+How your files, folders, and projects are structured. The one that quietly rots, so it gets
+re-checked every run.
+- **basic:** tidy — not a dumping ground
+- **solid:** intentional, scoped projects/folders
+- **advanced:** actively audited and maintained — cruft removed, structure still fits the work
 
----
+### 3. Tools & Connectivity
+What Claude is connected to — MCP servers, connectors, integrations — by *any* method. A setup
+wired to nothing is far weaker than one connected to even a tool or two.
+- **basic:** connected to one thing
+- **solid:** a couple of things connected
+- **advanced:** richly wired into the tools you actually use
 
-## Level 1 — Foundation
+### 4. Skills
+Reusable instruction sets for tasks you repeat. **Quality over count** — two sharp skills beats ten
+thin ones, and a small number of good skills is fine all the way up the ladder.
+- **basic:** one or two skills
+- **solid:** a few skills, some with their own reference files
+- **advanced:** composed/templated skills that reference each other or chain
 
-**You have:** A CLAUDE.md, 2-3 skills.
-
-**What you'll learn:** Reference libraries — docs you drop into a `reference/` folder so Claude can look things up when it needs to. Think templates, term glossaries, process docs. Also: behavioral rules — standing instructions in your CLAUDE.md that shape how Claude works with you (tone, format preferences, things to always/never do).
-
-**What gets built:** A reference folder with 2-3 starter docs, plus new behavioral rules in your CLAUDE.md.
-
----
-
-## Level 2 — Established
-
-**You have:** Rich CLAUDE.md, reference docs, 4+ skills.
-
-**What you'll learn:** Skill design — how to split a "does everything" skill into focused ones, add output templates, and organize skills with their own reference files. Also: subfolder CLAUDE.md files — scoped instructions for different work areas.
-
-**What gets built:** Refined skills with better structure, output templates, subfolder organization.
-
----
-
-## Level 3 — Power User
-
-**You have:** Organized system, multiple refined skills, good reference library.
-
-**What you'll learn:** Session continuity — keeping notes between conversations so Claude picks up where you left off. Also: advanced skill patterns like skills that reference other files, multi-step skills, and system maintenance habits.
-
-**What gets built:** Session notes workflow, advanced skill upgrades.
-
----
-
-## Level 4 — Graduate
-
-**You have:** A complete, well-organized setup.
-
-**What you'll learn:** There's a whole other level — Claude Code CLI. Hooks that run automatically, persistent memory across sessions, MCP servers that connect Claude to your tools, and agent teams that work in parallel.
-
-**What gets built:** Nothing (yet). This level is about awareness. When you're ready, the CLI is there.
+### 5. Knowledge & Memory (the ceiling)
+Two related things: knowledge Claude can *look up*, and memory that *persists across sessions*.
+- **basic:** a reference doc or two
+- **solid:** a real knowledge library, and/or memory that carries context between sessions
+- **advanced:** a maintained knowledge layer plus durable memory, feeding everything else
 
 ---
 
-## How Levels Are Detected
+## The level ladder
 
-Levels are assigned automatically based on what files exist in your project — not by asking you. The skill scans for CLAUDE.md, skills, reference docs, folder structure, and organization patterns. You don't need to declare your level.
+Your level is the highest one whose conditions are met. Conditions are about **depth**, never about
+how many skills you have.
 
-## How Often to Run
+### Level 0 — Getting Started
+No real instructions file; the setup is essentially empty. **Next:** create your instructions file.
 
-Every 2-4 weeks is a good cadence. Each run detects your current state, celebrates progress, and suggests 2-3 concrete next steps.
+### Level 1 — Foundation
+**The true minimum: Instructions ≥ basic AND Organization ≥ basic.** You have a real instructions
+file with a role, and your files aren't a mess. Skills and tools are optional here.
+**Next:** add behavioral rules; connect your first tool.
+
+### Level 2 — Organized
+Instructions ≥ solid (behavioral rules), Organization ≥ solid (intentional and scoped), and at
+least one of {a tool connected, a skill in use}.
+**Next:** connect a second tool; start auditing your organization; capture a repeated task as a skill.
+
+### Level 3 — Connected & Scaling
+Organization advanced (audited & maintained), Tools ≥ solid (a couple connected), Instructions
+advanced (scoped/subfolder), and at least a skill or two in use. **You can sit here happily with
+just two good skills.**
+**Next:** start a knowledge library; set up memory that persists across sessions.
+
+### Level 4 — Full System
+Everything in Level 3, plus Knowledge & Memory ≥ solid — a knowledge library and/or persistent
+memory — with all five dimensions reinforcing each other.
+**Next:** maintenance. Keep auditing organization, prune stale knowledge, refine skills.
+
+---
+
+## The priority stack (what to coach first)
+
+When recommending next steps, work foundation-up:
+
+1. **Instructions** — the highest-leverage thing for anyone missing it
+2. **Organization** — tidy and scope; keep re-checking it as the setup grows
+3. **Tools & Connectivity** — connect to at least one or two things; if connected to *nothing*, this jumps to #1 regardless of level
+4. **Skills** — capture repeated tasks; quality over count
+5. **Knowledge & Memory** — reference library + cross-session memory; the top of the ladder
+
+---
+
+## How levels are detected
+
+The skill scans what exists — the instructions file, folder/project structure, connected tools (or
+asks, when it can't see them), skills, and reference/memory — and scores the five dimensions. You
+don't declare your level; it's read from your setup. Connectivity in particular is often invisible
+from inside a session, so the skill will simply ask what you've connected rather than guess.
+
+## How often to run
+
+Every 2–4 weeks is a good cadence. Each run re-scores you, celebrates progress, and suggests 2–3
+concrete next steps.

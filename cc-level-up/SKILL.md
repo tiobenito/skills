@@ -1,84 +1,100 @@
 ---
 name: cc-level-up
-description: Guided progression tool for improving your Claude setup. Detects your current level, explains what you can do next, and builds it for you. Designed for people new to Claude — especially non-technical users on claude.ai Projects. Use when user says "level up my setup", "what should I improve", "help me set up Claude", "cc level up", "how do I get better at Claude". Also use when someone is new to Claude and wants help getting started.
+description: Guided progression for your Claude setup, on any platform (Claude Code CLI, the desktop app, claude.ai, or other agent tools like Codex). Detects how far along your setup is across five capability dimensions, explains what's worth doing next, and builds it for you. Use when user says "level up my setup", "what should I improve", "help me set up Claude", "cc level up", "audit my setup", or "how do I get better at Claude". Also use when someone new wants help getting started.
 ---
 
 # CC Level-Up
 
-Help the user improve their Claude setup one step at a time. Detect where they are, explain what's possible, and build it for them.
+Help the user improve their Claude setup one step at a time, wherever they use Claude. Detect
+where they are across five dimensions, explain what's possible, and build it for them.
 
 ## References
 
-- `references/level-guide.md` — Full progression path with level descriptions
+- `references/level-guide.md` — The five dimensions + the level ladder, in full
 - `references/org-context.md` — Role-to-content mapping for personalization (customize for your org)
 - `references/last-level-up.md` — State from the most recent run
-- `references/templates/claude-md-starter.md` — CLAUDE.md creation guide + template
+- `references/templates/claude-md-starter.md` — Instructions-file creation guide + template
 - `references/templates/skill-starter.md` — Skill creation guide + template
 - `references/templates/reference-starter.md` — Reference doc template
 
-Read `references/org-context.md` before the build phase — it drives personalization.
+Read `references/level-guide.md` before scoring and `references/org-context.md` before the build phase.
 
 ## Tone
 
-Friendly, encouraging, conversational. You're a helpful colleague, not an auditor. Teach real terms (CLAUDE.md, skill, reference doc) but always explain them in plain language first. Never use jargon without a one-sentence explanation.
+Friendly, encouraging, conversational. You're a helpful colleague, not an auditor. Teach real
+terms (instructions file, skill, reference doc, MCP/connector) but always explain them in plain
+language first. Never use jargon without a one-sentence explanation.
 
-**Platform assumption:** By default, assume the user is on claude.ai Projects (the web app), not the CLI. Do not mention hooks, auto-memory, MCP servers, or agents unless they reach Level 4. Use "project instructions" instead of "CLAUDE.md" in casual language (but use the real filename when creating files). If you know the user is on Claude Code (CLI), adjust accordingly.
+## Platform — works anywhere
+
+This skill is platform-agnostic. First, figure out where the user runs Claude, because it changes
+the vocabulary, not the ideas:
+
+| Platform | Instructions file | Skills | Tools/connectivity |
+|---|---|---|---|
+| **Claude Code (CLI)** | `CLAUDE.md` | `skills/` folder | MCP servers (`.mcp.json`), hooks |
+| **Desktop app** | project instructions | project skills | connectors |
+| **claude.ai (web)** | project instructions | project skills | connectors |
+| **Codex / other agents** | `AGENTS.md` (or equivalent) | equivalent | MCP / integrations |
+
+Detect the platform from what you can see (a `CLAUDE.md` + `.mcp.json` → CLI; an `AGENTS.md` →
+Codex; etc.). If it's genuinely unclear, ask one quick question. Then use that platform's words
+when you talk to the user, but score the same five dimensions for everyone.
 
 ## Performance Notes
 
 - Max 3 recommendations per run. Do not overwhelm.
 - Take your time on detection — read files, don't guess from names.
 - Always show what you built before moving to the next thing.
-- The user may not know what a "skill" is yet. Explain before asking if they want one.
+- The user may not know what a "skill" or "MCP" is yet. Explain before asking if they want one.
 
 ---
 
 ## Step 1: Detect
 
-Scan the user's project to determine their current level. Do this silently — don't narrate every file you're reading.
+Scan the user's setup and score it across the **five dimensions** (full rubric in
+`references/level-guide.md`). Do this silently — don't narrate every file you read. Score each
+dimension `absent · basic · solid · advanced`.
 
-### What to Scan
+| Dimension | What to look at | absent → advanced |
+|---|---|---|
+| **Instructions** | the instructions file (CLAUDE.md / AGENTS.md / project instructions) | none → a role description → behavioral rules → scoped / subfolder instructions |
+| **Organization** | folder + project structure, naming, cruft | messy/default → tidy → scoped projects → actively audited & maintained |
+| **Tools & Connectivity** | MCP servers, connectors, integrations — by ANY method | connected to nothing → one thing → a couple → richly wired |
+| **Skills** | reusable instruction sets | none → one or two → a few, with references → composed/templated |
+| **Knowledge & Memory** | reference docs AND persistence across sessions | none → a reference doc → a knowledge library → memory that persists across sessions |
 
-| What | Where | What it tells you |
-|------|-------|-------------------|
-| CLAUDE.md | Project root | Exists? How many lines? Has behavioral rules? |
-| Skills | `skills/` or similar folder | Count. Have frontmatter? Have references/? |
-| Reference docs | `reference/` folder | Exists? How many docs? |
-| Subfolder CLAUDE.md | Subdirectories | Any scoped instructions? |
-| Folder organization | Project root | Beyond default course folders? |
-| Previous run | `references/last-level-up.md` | Level last time? What was built? |
+Also read `references/last-level-up.md` — if it has prior data, this is a returning user.
 
-Use Glob and Read tools. Record findings internally.
+### Two foundational dimensions, then the rest
 
-### Level Assignment
+The ladder is anchored on **Instructions** and **Organization** — those are the floor. The other
+three deepen on top. **Skill count is never a gate** — two strong skills can carry someone all the
+way to Level 3. Don't withhold a level because they "only" have a skill or two.
 
-Assign the highest level where ALL criteria are met:
+### Tools & Connectivity — audit it directly
 
-**Level 0 — Getting Started**
-- Has course folders (inbox/, processed/, outputs/) OR is a mostly empty project
-- 0-1 skills
-- No CLAUDE.md (or CLAUDE.md under 5 lines)
+This one is crucial: a setup wired to nothing is far weaker than one connected to even a tool or
+two, no matter how good the instructions are. So **audit connectivity explicitly**, and detect
+where you can / ask where you can't:
 
-**Level 1 — Foundation**
-- Has a CLAUDE.md with at least a role description (5+ lines)
-- 2-3 skills with basic structure
+- **Can detect** (CLI): read `.mcp.json`, settings, hook config.
+- **Often can't detect** (web/desktop): you usually can't see a user's connectors from inside a
+  session — so just ask: *"What have you connected Claude to — any connectors, MCP servers, or
+  integrations?"* Don't guess.
 
-**Level 2 — Established**
-- CLAUDE.md has behavioral rules (not just a role description — includes "always/never" type instructions, format preferences, or workflow rules, 15+ lines)
-- Reference folder with 2+ docs
-- 4+ skills
+**If they're connected to nothing, flag it loudly regardless of their other dimensions** — being
+unconnected is the single biggest thing holding the setup back, and it becomes the #1 recommendation.
 
-**Level 3 — Power User**
-- Well-organized folder structure (subfolders beyond course defaults)
-- Skills have their own reference files or output templates
-- Subfolder CLAUDE.md files OR evidence of progressive organization
-- 6+ skills
+### Level assignment
 
-**Level 4 — Graduate**
-- Complete, well-organized system across all of the above
-- Multiple refined skills with references
-- Rich CLAUDE.md with clear sections
-- Demonstrates system thinking (files reference each other, clear separation of concerns)
+Assign the highest level whose conditions are met (conditions are about *depth*, not skill counts):
+
+- **Level 0 — Getting Started:** no real instructions file; setup is essentially empty.
+- **Level 1 — Foundation:** Instructions ≥ basic (a real role description) **and** Organization ≥ basic (not a mess). This is the true minimum. Skills and tools optional here.
+- **Level 2 — Organized:** Instructions ≥ solid (behavioral rules) **and** Organization ≥ solid (intentional, scoped) **and** at least one of {a tool connected, a skill in use}.
+- **Level 3 — Connected & Scaling:** Organization advanced (audited & maintained) **and** Tools ≥ solid (a couple of things connected) **and** Instructions advanced (scoped/subfolder) **and** at least a skill or two in use (count doesn't matter beyond that).
+- **Level 4 — Full System:** all of Level 3 **plus** Knowledge & Memory ≥ solid (a knowledge library and/or memory that persists across sessions), with the five dimensions reinforcing each other.
 
 ---
 
@@ -88,55 +104,29 @@ Show the user their level and what's next. Keep it warm and concise.
 
 ### Format
 
-Start with a greeting and their level:
-
 > **Your setup: [Level Name]** (Level [N] of 4)
 >
-> [One sentence about what this level means — from level-guide.md]
-
-If this is a returning user (last-level-up.md has previous data), celebrate progress:
-
-> Since last time: [what changed — new skills added, CLAUDE.md grew, new reference docs]
-
-Then show 2-3 recommendations as cards:
-
-> **Here's what I'd suggest next:**
+> [One sentence on what this level means — from level-guide.md]
 >
-> **1. [Title]**
-> [2-sentence plain-language description of what this is and why it helps]
->
-> **2. [Title]**
-> [2-sentence plain-language description]
->
-> **3. [Title]** *(optional — only if relevant)*
-> [2-sentence plain-language description]
->
-> Which of these sounds useful? I can set any of them up for you right now.
+> [A one-line read on the five dimensions — e.g. "Instructions and organization are solid; you're connected to nothing yet, and there's no memory layer."]
 
-### What to Recommend at Each Level
+If this is a returning user, celebrate progress first ("Since last time: …").
 
-**Level 0 recommendations:**
-1. Create your project instructions (CLAUDE.md) — "This is a file that tells Claude who you are and how you like to work. It loads automatically every time you start a conversation."
-2. Build your first skill — "A skill is a reusable instruction set for a task you do repeatedly. Instead of explaining what you want every time, you just say 'use my [skill name]'."
+Then show 2–3 recommendations as cards and offer to build them. **Order recommendations by the
+priority stack below**, and always surface a zero-connectivity gap first.
 
-**Level 1 recommendations:**
-1. Start a reference library — "A reference folder is where you put docs Claude can look up — templates, glossaries, lists. Claude reads them when it needs context, so you don't have to paste them every time."
-2. Add behavioral rules to your CLAUDE.md — "These are standing instructions like 'always use bullet points' or 'never round dollar amounts'. They shape every conversation without you having to repeat yourself."
-3. Build another skill — "You've got [N] skills. Based on your role, [suggested skill] could save you time."
+### What to recommend — follow the priority stack
 
-**Level 2 recommendations:**
-1. Refine your skills — "Some of your skills could be sharper. [Specific suggestion — e.g., 'Your status report skill could include an output template so the format is consistent every time.']"
-2. Organize with subfolder instructions — "You can add a CLAUDE.md inside a subfolder to give Claude context that's specific to that area. Good for [specific suggestion based on their folders]."
-3. Add output templates to skills — "An output template inside a skill means Claude produces the same format every time. Great for reports, summaries, or anything with a consistent structure."
+The progression to coach people through, foundation first:
 
-**Level 3 recommendations:**
-1. Session notes habit — "Right now, each conversation starts fresh. A session notes file lets Claude pick up where you left off — what you were working on, decisions made, next steps."
-2. Advanced skill patterns — "Your skills can reference other files, chain together, or include example outputs. [Specific suggestion based on their skills.]"
-3. System maintenance — "Your setup is mature enough to benefit from periodic review. Things get stale — old references, outdated rules, skills you've outgrown."
+1. **Instructions** — get a real instructions file with behavioral rules. The highest-leverage thing for anyone who lacks it.
+2. **Organization** — tidy and scope folders/projects; and *keep auditing this* as their setup grows — it's the one that quietly rots.
+3. **Tools & Connectivity** — connect Claude to at least one or two things (a connector, an MCP server, an integration). If they're connected to nothing, this jumps to #1 regardless of level.
+4. **Skills** — capture a repeated task as a skill. Quality over count — a couple of sharp skills beats ten thin ones.
+5. **Knowledge & Memory** — a reference library, and memory that persists across sessions. The top of the ladder.
 
-**Level 4 recommendations:**
-1. Mention the CLI — "There's a whole other level if you want it. Claude Code (the CLI version) gives you hooks that run automatically, persistent memory across sessions, MCP servers that connect Claude to your tools, and agent teams that work in parallel. It's a bigger learning curve, but the payoff is huge."
-2. Suggest cc-audit — "If you move to the CLI, there's an audit skill that scores your entire setup and gives you a detailed report card. Good for power users who want to optimize."
+Pick the 2–3 that move *this* user furthest given their dimension scores. Don't recommend a skill
+to someone whose instructions file is empty; don't push memory on someone connected to nothing.
 
 ---
 
@@ -146,60 +136,30 @@ For each recommendation the user accepts, follow the **Explain + Build** pattern
 
 ### The Pattern
 
-1. **Ask** 2-4 personalizing questions relevant to what you're building
+1. **Ask** 2–4 personalizing questions relevant to what you're building
    - Read the relevant template from `references/templates/` for question ideas
    - Read `references/org-context.md` if this is role-dependent content
-2. **Explain** what you're about to create (1-2 sentences, plain language)
+2. **Explain** what you're about to create (1–2 sentences, plain language)
 3. **Build** the file(s)
 4. **Show** a summary of what was created (quote key parts, not the whole file)
-5. **Explain** how it changes their experience going forward (1-2 sentences)
+5. **Explain** how it changes their experience going forward (1–2 sentences)
 
 ### Critical Rules
 
-- **Never overwrite an existing CLAUDE.md.** Read it first. Add to it, or ask before replacing content.
-- **Never overwrite existing skills.** Suggest improvements or create new ones alongside.
-- **Always show what you created** before moving to the next recommendation. Don't batch-create silently.
-- **Use the user's own words** from their answers when writing content. Don't over-polish into corporate speak.
-- **Keep skills simple.** First skills should be 15-30 lines, not 100-line masterpieces.
-- **Keep CLAUDE.md minimal.** Start with 10-15 lines. Users can always add more. Resist the urge to front-load.
-- **Explain file locations.** Tell the user where the file lives and why it's there: "I created this in your skills folder — that's where Claude looks for reusable instructions."
+- **Never overwrite an existing instructions file or skill.** Read first. Add to it, or ask before replacing.
+- **Always show what you created** before moving on. Don't batch-create silently.
+- **Use the user's own words** from their answers. Don't over-polish into corporate speak.
+- **Keep skills simple.** First skills should be 15–30 lines, not 100-line masterpieces.
+- **Keep the instructions file minimal.** Start with 10–15 lines. Resist front-loading.
+- **Explain file locations** and use the right name for their platform (CLAUDE.md / AGENTS.md / project instructions).
 
-### Building a CLAUDE.md (Level 0)
+### What "building" looks like per dimension
 
-1. Ask: role, primary use case, any format preferences
-2. Read `references/templates/claude-md-starter.md` for the template
-3. Read `references/org-context.md` for role-specific flavor
-4. Create the file at the project root
-5. Show what you wrote, explain that it loads automatically every session
-
-### Building a Skill (Level 0-1)
-
-1. Ask: what task to speed up, how they do it now, what good output looks like
-2. Read `references/templates/skill-starter.md` for structure
-3. Read `references/org-context.md` for role-appropriate suggestions
-4. Create the skill folder and SKILL.md
-5. Show the skill, explain how to invoke it ("just say 'use my [skill name]'")
-
-### Building a Reference Library (Level 1)
-
-1. Ask: what docs they reference often, what they wish Claude already knew
-2. Read `references/templates/reference-starter.md` for structure
-3. Create `reference/` folder and 2-3 starter docs
-4. Show what was created, explain that Claude reads these when relevant
-
-### Refining Skills (Level 2)
-
-1. Read existing skills to identify improvement opportunities
-2. Suggest specific changes: add output templates, split multi-purpose skills, add reference files
-3. Ask before making changes — explain what you'd change and why
-4. Make the edits, show the diff
-
-### Adding Behavioral Rules (Level 1-2)
-
-1. Ask: things they always want, things they never want, format preferences
-2. Read existing CLAUDE.md
-3. Add a "How I Like Things" or "Rules" section
-4. Show what was added
+- **Instructions** → read `references/templates/claude-md-starter.md` + `org-context.md`; create or extend the instructions file with a role and behavioral rules.
+- **Organization** → audit folders/projects; propose a tidy structure; add subfolder/scoped instructions where they'd help. (This is partly a *review*, not just file creation.)
+- **Tools & Connectivity** → explain MCP/connectors in plain language; point them to one or two worth connecting for their work; walk them through it (or hand them the exact steps if you can't do it for them).
+- **Skills** → read `references/templates/skill-starter.md`; turn a repeated task into a small skill.
+- **Knowledge & Memory** → read `references/templates/reference-starter.md`; start a reference library; set up a memory/session-notes habit so Claude carries context across sessions.
 
 ---
 
@@ -207,32 +167,27 @@ For each recommendation the user accepts, follow the **Explain + Build** pattern
 
 After building everything the user requested, update `references/last-level-up.md`.
 
-### What to Save
-
 ```markdown
 # Last Level-Up
 
 **Date:** [today's date]
+**Platform:** [CLI / desktop / web / Codex / other]
 **Level detected:** [N] — [Level Name]
 **Previous level:** [N from last run, or "First run"]
+**Dimension scores:** Instructions [x] · Organization [x] · Tools [x] · Skills [x] · Knowledge/Memory [x]
 
 ## What Was Built
-
-- [filename] — [one-line description of what it does]
-- [filename] — [one-line description]
+- [filename or change] — [one-line description]
 
 ## Recommendations Given
-
 1. [recommendation title] — [accepted/declined/skipped]
-2. [recommendation title] — [accepted/declined/skipped]
 
 ## Suggested Next Run
-
-[Date 2-4 weeks from now] — by then you'll have used what we built and be ready for the next step.
+[Date 2–4 weeks out] — by then you'll have used what we built and be ready for the next step.
 ```
 
 ### Closing Message
 
-End with something encouraging and forward-looking:
+End encouraging and forward-looking:
 
-> That's it for now! You're at **[Level Name]** with [brief summary of what they have]. Use what we built for a couple weeks, and when you're ready for more, just say "level up" again.
+> That's it for now! You're at **[Level Name]** with [brief summary]. Use what we built for a couple weeks, and when you're ready for more, just say "level up" again.
