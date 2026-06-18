@@ -1,0 +1,120 @@
+<!doctype html>
+<!--
+  LAYOUT C — MILESTONE TIMELINE  (time-anchored)
+  North star → metric strip → a vertical timeline of dated milestones with a "today" marker.
+  Best for: deadline-driven programs (launches, seasonal cutoffs) where dates matter most.
+  Each node carries a date, status (live/progress/next/blocked/later), owner, and note.
+  THEME: set data-theme on <html> to "cream" | "forest" | "midnight". Content is a worked example.
+-->
+<html lang="en" data-theme="cream">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Self-Serve Onboarding — Timeline</title>
+<style>
+  [data-theme="cream"] {
+    --bg:#F8F5EF; --surface:#FFFFFF; --surface-2:#F1ECE2; --surface-3:#EBE4D2;
+    --ink:#1A2332; --ink-2:#4A5468; --ink-3:#7A8294; --ink-4:#ABA89E;
+    --line:#E4DCC9; --line-2:#D6CBB1; --accent:#0B5566; --sand:#C9B98E;
+    --moss:#3D8B5A; --amber:#D4842B; --terra:#B84B3A;
+    --hero-bg:#1A2332; --hero-text:#F8F5EF; --hero-label:#C9B98E; --hero-num:#FFFFFF; --hero-num-lab:#B8AE92;
+  }
+  [data-theme="forest"] {
+    --bg:#FFFFFF; --surface:#FBFDFA; --surface-2:#EEF4EA; --surface-3:#E3EDE0;
+    --ink:#0A2419; --ink-2:#2F6E5A; --ink-3:#6B8A7E; --ink-4:#9BB3A8;
+    --line:#CFDCC8; --line-2:#BCD0B3; --accent:#0F4D36; --sand:#2F7A5C;
+    --moss:#15803D; --amber:#B45309; --terra:#B91C1C;
+    --hero-bg:#0F4D36; --hero-text:#EAF6EF; --hero-label:#7ED4B0; --hero-num:#FFFFFF; --hero-num-lab:#9ED8BF;
+  }
+  [data-theme="midnight"] {
+    --bg:#0E1A17; --surface:#142822; --surface-2:#1A3530; --surface-3:#0B1714;
+    --ink:#E8EFE9; --ink-2:#A9C4B9; --ink-3:#8BADA0; --ink-4:#5F7D72;
+    --line:#254A40; --line-2:#316152; --accent:#5EC4A0; --sand:#7ED4B0;
+    --moss:#22C55E; --amber:#F59E0B; --terra:#EF4444;
+    --hero-bg:#1A3530; --hero-text:#E8EFE9; --hero-label:#5EC4A0; --hero-num:#FFFFFF; --hero-num-lab:#8BADA0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.45; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 32px 80px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  header .meta { color: var(--ink-3); font-size: 12px; }
+  header .meta strong { color: var(--ink); }
+  .north-star { background: var(--hero-bg); color: var(--hero-text); border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .north-star .label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hero-label); }
+  .north-star h2 { margin: 4px 0 0; font-size: 16px; font-weight: 500; max-width: 600px; }
+  .north-star .targets { display: flex; gap: 26px; align-items: flex-end; }
+  .north-star .targets > div { text-align: center; min-width: 58px; }
+  .north-star .targets .num { font-size: 15px; color: var(--hero-num); font-weight: 600; }
+  .north-star .targets .num small { font-size: 10px; color: var(--hero-num-lab); margin-left: 3px; }
+  .north-star .targets .lab { color: var(--hero-num-lab); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .stat .k { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+  .stat .v { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .stat .v small { font-size: 11px; color: var(--ink-3); font-weight: 500; }
+  .stat .s { font-size: 11px; color: var(--ink-2); margin-top: 2px; }
+  @media (max-width: 760px) { .strip { grid-template-columns: repeat(2, 1fr); } }
+  /* timeline */
+  .timeline { position: relative; margin-left: 8px; padding-left: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--line-2); }
+  .node { position: relative; margin-bottom: 16px; }
+  .node::before { content: ''; position: absolute; left: -30px; top: 4px; width: 13px; height: 13px; border-radius: 50%; background: var(--surface); border: 3px solid var(--ink-4); }
+  .node .date { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .node .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; margin-top: 4px; }
+  .node .ttl { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .node .note { font-size: 12px; color: var(--ink-2); margin-top: 3px; line-height: 1.4; }
+  .node .cf { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .node .st { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-3); }
+  .node .st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); }
+  .node .owner { font-size: 10px; font-weight: 600; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 20px; padding: 2px 8px; }
+  .node.live::before { border-color: var(--moss); background: var(--moss); } .node.live .st { color: var(--moss); } .node.live .st::before { background: var(--moss); }
+  .node.progress::before { border-color: var(--amber); background: var(--amber); } .node.progress .st { color: var(--amber); } .node.progress .st::before { background: var(--amber); }
+  .node.next::before { border-color: var(--ink-3); } .node.next .st { color: var(--ink-2); } .node.next .st::before { background: var(--ink-3); }
+  .node.blocked::before { border-color: var(--terra); background: var(--terra); } .node.blocked .st { color: var(--terra); } .node.blocked .st::before { background: var(--terra); }
+  .node.later { opacity: 0.78; }
+  .node.risk .card { border-left: 3px solid var(--amber); }
+  /* today marker */
+  .today { position: relative; margin: 4px 0 16px; }
+  .today::before { content: ''; position: absolute; left: -30px; top: 50%; width: 17px; height: 17px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); transform: translateY(-50%); }
+  .today .pill { display: inline-block; background: var(--accent); color: var(--surface); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+  footer { margin-top: 30px; color: var(--ink-3); font-size: 11px; padding-top: 12px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div><h1>Self-Serve Onboarding — Timeline</h1></div><div class="meta">Updated <strong>Week 12</strong> · weekly</div></header>
+  <section class="north-star">
+    <div><div class="label">North star</div><h2>Every new user reaches first value without talking to a human — % of signups that self-activate</h2></div>
+    <div class="targets">
+      <div><div class="num">42<small>%</small></div><div class="lab">Today</div></div>
+      <div><div class="num">70<small>%</small></div><div class="lab">End Q3</div></div>
+      <div><div class="num">Self-serve</div><div class="lab">End state</div></div>
+    </div>
+  </section>
+  <div class="strip">
+    <div class="stat"><div class="k">Self-activation</div><div class="v">42<small>%</small></div><div class="s">Baseline Week 10</div></div>
+    <div class="stat"><div class="k">Phase</div><div class="v">1<small>/4</small></div><div class="s">Signup &amp; first value</div></div>
+    <div class="stat"><div class="k">Target date</div><div class="v">End Q3</div><div class="s">70% self-activation</div></div>
+    <div class="stat"><div class="k">Key risk</div><div class="v" style="font-size:15px; color:var(--terra);">Vendor API</div><div class="s">Answer bot blocked</div></div>
+  </div>
+
+  <div class="timeline">
+    <div class="node live"><div class="date">Week 5</div><div class="card"><div class="ttl">Sample-project-on-signup shipped</div><div class="note">New accounts start populated instead of on a blank screen — the first big lever on activation.</div><div class="cf"><span class="st">Shipped</span><span class="owner">Sam</span></div></div></div>
+    <div class="node live"><div class="date">Week 8</div><div class="card"><div class="ttl">4-phase roadmap locked</div><div class="note">Signup &rarr; guided setup &rarr; automated assistance &rarr; self-improving. Onboarding named the top Q3 priority.</div><div class="cf"><span class="st">Shipped</span><span class="owner">Maya</span></div></div></div>
+    <div class="node live"><div class="date">Week 10</div><div class="card"><div class="ttl">Activation funnel instrumented</div><div class="note">End-to-end funnel measured; baseline self-activation is 42%. This becomes the north-star metric.</div><div class="cf"><span class="st">Shipped</span><span class="owner">Dana</span></div></div></div>
+    <div class="node live"><div class="date">Week 11</div><div class="card"><div class="ttl">Setup checklist widget live</div><div class="note">In-app checklist tracks the first key actions a new user should take.</div><div class="cf"><span class="st">Shipped</span><span class="owner">Sam</span></div></div></div>
+
+    <div class="today"><span class="pill">Today · Week 12</span></div>
+
+    <div class="node progress"><div class="date">Week 13</div><div class="card"><div class="ttl">Finish the interactive product tour</div><div class="note">3 of 5 steps built; sharing and settings steps remain.</div><div class="cf"><span class="st">In progress</span><span class="owner">Maya</span></div></div></div>
+    <div class="node next"><div class="date">Week 14-15</div><div class="card"><div class="ttl">Empty-state prompts + activation emails</div><div class="note">Guide users with no data yet; nudge users who stall before first value.</div><div class="cf"><span class="st">Next</span><span class="owner">Maya + Sam</span></div></div></div>
+    <div class="node next"><div class="date">End of Q3</div><div class="card"><div class="ttl">70% self-activation</div><div class="note">Quarter target — most new users reach first value with no human help.</div><div class="cf"><span class="st">Target</span><span class="owner">Maya</span></div></div></div>
+    <div class="node blocked"><div class="date">When API lands</div><div class="card"><div class="ttl">AI answer bot</div><div class="note">Blocked on the support-bot vendor API (access requested, not granted). Phase 3.</div><div class="cf"><span class="st">Blocked</span><span class="owner">Dana</span></div></div></div>
+    <div class="node later"><div class="date">Later</div><div class="card"><div class="ttl">Self-improving onboarding</div><div class="note">A/B testing + per-segment personalization; deferred until the funnel is stable and well-instrumented. Phase 4.</div><div class="cf"><span class="st">Later</span><span class="owner">Lee</span></div></div></div>
+  </div>
+  <footer>Source of truth in <code>state.md</code>. <strong>(Layout C &middot; Milestone Timeline &mdash; sample)</strong></footer>
+</div>
+</body>
+</html>

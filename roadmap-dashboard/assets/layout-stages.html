@@ -1,0 +1,351 @@
+<!doctype html>
+<!--
+  LAYOUT A — STAGES & STEPS  (pipeline drill-down)
+  North star → stage tiles → per-stage Plan/Details tabs with a horizontal step sequence.
+  Best for: phased / gated programs that move through stages.
+
+  THEME: set data-theme on <html> to "cream" | "forest" | "midnight".
+  All component CSS uses variables, so the theme is the ONLY thing that changes color.
+  Content below is a worked example (Automated Spot Quoting) — replace it with the real program.
+-->
+<html lang="en" data-theme="cream">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Self-Serve Onboarding — Roadmap</title>
+<style>
+  /* ============ THEMES — pick one via <html data-theme="..."> ============ */
+  /* 1. WARM CREAM — light, editorial, print-friendly (the scheduling-dashboard look) */
+  [data-theme="cream"] {
+    --bg:#F8F5EF; --surface:#FFFFFF; --surface-2:#F1ECE2; --surface-3:#EBE4D2;
+    --ink:#1A2332; --ink-2:#4A5468; --ink-3:#7A8294; --ink-4:#ABA89E;
+    --line:#E4DCC9; --line-2:#D6CBB1; --accent:#0B5566; --sand:#C9B98E;
+    --moss:#3D8B5A; --moss-bg:#ECF5EE; --moss-line:#C5DFC9;
+    --amber:#D4842B; --amber-bg:#FBF2E1; --amber-line:#E8D5A3;
+    --terra:#B84B3A; --terra-bg:#FBEDEA; --terra-line:#E9C5BD;
+    --hero-bg:#1A2332; --hero-text:#F8F5EF; --hero-label:#C9B98E; --hero-num:#FFFFFF; --hero-num-lab:#B8AE92;
+    --pd-bg:#1A2332; --pd-text:#E8E0D0; --pd-line:#2A3245; --pd-muted:#B8AE92;
+  }
+  /* 2. FOREST — crisp white + deep green, mint accent */
+  [data-theme="forest"] {
+    --bg:#FFFFFF; --surface:#FBFDFA; --surface-2:#EEF4EA; --surface-3:#E3EDE0;
+    --ink:#0A2419; --ink-2:#2F6E5A; --ink-3:#6B8A7E; --ink-4:#9BB3A8;
+    --line:#CFDCC8; --line-2:#BCD0B3; --accent:#0F4D36; --sand:#2F7A5C;
+    --moss:#15803D; --moss-bg:#DCFCE7; --moss-line:#A7E3BD;
+    --amber:#B45309; --amber-bg:#FEF3C7; --amber-line:#F0D894;
+    --terra:#B91C1C; --terra-bg:#FEE2E2; --terra-line:#F3B4B4;
+    --hero-bg:#0F4D36; --hero-text:#EAF6EF; --hero-label:#7ED4B0; --hero-num:#FFFFFF; --hero-num-lab:#9ED8BF;
+    --pd-bg:#0F4D36; --pd-text:#EAF6EF; --pd-line:#1D6B4D; --pd-muted:#9ED8BF;
+  }
+  /* 3. MIDNIGHT — dark green, screen-share friendly */
+  [data-theme="midnight"] {
+    --bg:#0E1A17; --surface:#142822; --surface-2:#1A3530; --surface-3:#0B1714;
+    --ink:#E8EFE9; --ink-2:#A9C4B9; --ink-3:#8BADA0; --ink-4:#5F7D72;
+    --line:#254A40; --line-2:#316152; --accent:#5EC4A0; --sand:#7ED4B0;
+    --moss:#22C55E; --moss-bg:#11271C; --moss-line:#1F5236;
+    --amber:#F59E0B; --amber-bg:#2A1F08; --amber-line:#5A4310;
+    --terra:#EF4444; --terra-bg:#2A1212; --terra-line:#5A2020;
+    --hero-bg:#1A3530; --hero-text:#E8EFE9; --hero-label:#5EC4A0; --hero-num:#FFFFFF; --hero-num-lab:#8BADA0;
+    --pd-bg:#0B1714; --pd-text:#CFE0D8; --pd-line:#1F3A32; --pd-muted:#7EA295;
+  }
+
+  /* ============ COMPONENTS (theme-agnostic — all colors via vars) ============ */
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.45; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 32px 80px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+  header .meta { color: var(--ink-3); font-size: 12px; font-variant-numeric: tabular-nums; }
+  header .meta strong { color: var(--ink); font-weight: 600; }
+  .north-star { background: var(--hero-bg); color: var(--hero-text); border-radius: 10px; padding: 20px 24px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .north-star .label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hero-label); }
+  .north-star h2 { margin: 4px 0 0; font-size: 16px; font-weight: 500; color: var(--hero-text); max-width: 640px; }
+  .north-star .targets { display: flex; gap: 32px; font-size: 12px; align-items: flex-end; }
+  .north-star .targets > div { text-align: center; min-width: 64px; }
+  .north-star .targets .num small { display: inline-block; font-size: 11px; font-weight: 500; color: var(--hero-num-lab); margin-left: 4px; letter-spacing: 0; }
+  .north-star .targets .num { font-size: 17px; color: var(--hero-num); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .north-star .targets .lab { color: var(--hero-num-lab); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .submetrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 36px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; position: relative; }
+  .tile .tile-num { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+  .tile .tile-name { font-size: 13px; font-weight: 600; margin: 4px 0 12px; }
+  .tile .tile-metric { display: flex; align-items: baseline; gap: 6px; }
+  .tile .tile-current { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .tile .tile-current.word { font-size: 18px; }
+  .tile .tile-current small { font-size: 13px; color: var(--ink-3); font-weight: 500; }
+  .tile .tile-target { font-size: 11px; color: var(--ink-3); }
+  .tile .tile-sub { font-size: 11px; color: var(--ink-2); margin-top: 4px; min-height: 14px; }
+  .tile .bar { height: 3px; background: var(--surface-2); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .tile .bar > div { height: 100%; }
+  .tile.deferred { background: repeating-linear-gradient(135deg, var(--surface), var(--surface) 8px, var(--surface-2) 8px, var(--surface-2) 9px); }
+  .tile .defer-tag { display: inline-block; background: var(--ink-3); color: var(--surface); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; font-weight: 600; }
+  .stage { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .stage-head { padding: 18px 24px 14px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .stage-head .left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .stage-num-badge { background: var(--accent); color: var(--surface); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.04em; flex-shrink: 0; }
+  .stage.deferred .stage-num-badge { background: var(--ink-3); }
+  .stage h3 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .stage-pulse { color: var(--ink-2); font-size: 12px; margin-left: 4px; }
+  .owner { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 20px; padding: 3px 9px 3px 7px; white-space: nowrap; }
+  .owner::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .step .owner { background: transparent; border: 0; padding: 0; color: var(--ink-3); }
+  .step .owner::before { width: 5px; height: 5px; }
+  .tabs { display: flex; gap: 2px; background: var(--surface-2); padding: 3px; border-radius: 6px; }
+  .tabs button { background: transparent; border: 0; padding: 5px 14px; font-size: 11px; font-weight: 600; font-family: inherit; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); cursor: pointer; border-radius: 4px; transition: all 0.15s; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button.active { background: var(--accent); color: var(--surface); }
+  .tab-pane { display: none; padding: 0 24px 24px; }
+  .tab-pane.active { display: block; }
+  .sequence { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(140px, 1fr); gap: 0; align-items: stretch; margin: 8px 0 4px; position: relative; }
+  .step { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 12px 12px 10px; margin-right: 14px; position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .step:last-child { margin-right: 0; }
+  .step::after { content: ''; position: absolute; right: -14px; top: 50%; width: 14px; height: 1px; background: var(--line-2); transform: translateY(-50%); }
+  .step:last-child::after { display: none; }
+  .step .step-n { font-size: 9px; color: var(--ink-3); letter-spacing: 0.12em; font-weight: 600; }
+  .step .step-name { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.25; min-height: 30px; }
+  .step .step-status { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-3); }
+  .step .step-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); }
+  .step .step-meta { font-size: 10px; color: var(--ink-3); margin-top: 2px; line-height: 1.3; }
+  .step.live { background: var(--moss-bg); border-color: var(--moss-line); }
+  .step.live .step-status { color: var(--moss); }
+  .step.live .step-status::before { background: var(--moss); }
+  .step.progress { background: var(--amber-bg); border-color: var(--amber-line); }
+  .step.progress .step-status { color: var(--amber); }
+  .step.progress .step-status::before { background: var(--amber); animation: pulse 1.6s ease-in-out infinite; }
+  .step.wire { background: var(--amber-bg); border-color: var(--amber-line); }
+  .step.wire .step-status { color: var(--amber); }
+  .step.wire .step-status::before { background: var(--amber); }
+  .step.next { background: var(--surface); border-color: var(--line); border-style: dashed; }
+  .step.next .step-status { color: var(--ink-2); }
+  .step.next .step-status::before { background: var(--ink-3); }
+  .step.later { background: var(--surface); border-color: var(--line); opacity: 0.7; border-style: dashed; }
+  .step.later .step-status { color: var(--ink-3); }
+  .step.later .step-status::before { background: var(--ink-4); }
+  .step.blocked { background: var(--terra-bg); border-color: var(--terra-line); }
+  .step.blocked .step-status { color: var(--terra); }
+  .step.blocked .step-status::before { background: var(--terra); }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .stage-summary { display: grid; grid-template-columns: 1fr auto; gap: 24px; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); align-items: center; }
+  .stage-summary .now { font-size: 12px; color: var(--ink-2); }
+  .stage-summary .now strong { color: var(--ink); }
+  .stage-summary .metric { display: flex; gap: 18px; align-items: baseline; font-variant-numeric: tabular-nums; }
+  .stage-summary .metric .big { font-size: 20px; font-weight: 600; color: var(--ink); }
+  .stage-summary .metric .tgt { font-size: 11px; color: var(--ink-3); }
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 800px) { .details-grid { grid-template-columns: 1fr; } }
+  .detail-block .label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; font-weight: 600; }
+  .detail-block ul { list-style: none; margin: 0; padding: 0; }
+  .detail-block li { font-size: 13px; padding: 7px 0; border-bottom: 1px dashed var(--line); color: var(--ink); }
+  .detail-block li:last-child { border-bottom: 0; }
+  .detail-block li small { display: block; color: var(--ink-3); font-size: 11px; margin-top: 2px; }
+  .activation { background: var(--surface-2); border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 18px; border-left: 3px solid var(--accent); }
+  .activation .lab { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+  .activation .gate { font-size: 15px; font-weight: 600; color: var(--accent); }
+  .activation .why { font-size: 12px; color: var(--ink-2); flex: 1; }
+  .bottom-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-top: 28px; }
+  @media (max-width: 880px) { .bottom-grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .panel.dark { background: var(--pd-bg); color: var(--pd-text); }
+  .panel.dark h4 { color: var(--pd-text); }
+  .panel.dark li { border-bottom-color: var(--pd-line); color: var(--pd-text); }
+  .panel.dark li small { color: var(--pd-muted); }
+  .panel h4 { margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; }
+  .panel ol, .panel ul { padding-left: 18px; margin: 0; font-size: 13px; }
+  .panel ol li, .panel ul li { margin-bottom: 6px; }
+  .changelog { list-style: none; padding: 0; margin: 0; }
+  .changelog li { display: grid; grid-template-columns: 70px 1fr; gap: 10px; font-size: 12px; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .changelog li:last-child { border-bottom: 0; }
+  .changelog .d { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .cross-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cross-item { background: var(--surface-2); padding: 9px 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; gap: 10px; }
+  .cross-item .nm { color: var(--ink); font-weight: 500; }
+  .cross-item .nm small { color: var(--ink-3); display: block; font-size: 10px; margin-top: 1px; font-weight: 400; }
+  .cross-pill { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; font-weight: 600; color: #fff; white-space: nowrap; }
+  .cross-pill.built { background: var(--moss); }
+  .cross-pill.progress { background: var(--amber); }
+  footer { margin-top: 32px; color: var(--ink-3); font-size: 11px; padding-top: 12px; border-top: 1px solid var(--line); }
+  footer code { background: var(--surface-2); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+  @media (max-width: 800px) { .submetrics { grid-template-columns: repeat(2, 1fr); } .sequence { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: 1fr 1fr; } .step { margin-right: 0; } .step::after { display: none; } }
+  .full-row { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>Self-Serve Onboarding — Roadmap</h1></div>
+    <div class="meta">Updated <strong>Week 12</strong> · weekly</div>
+  </header>
+  <section class="north-star">
+    <div>
+      <div class="label">North star</div>
+      <h2>Every new user reaches first value without talking to a human — % of signups that self-activate</h2>
+    </div>
+    <div class="targets">
+      <div><div class="num">42<small>%</small></div><div class="lab">Today</div></div>
+      <div><div class="num">70<small>%</small></div><div class="lab">End of Q3</div></div>
+      <div><div class="num">Fully self-serve</div><div class="lab">End state</div></div>
+    </div>
+  </section>
+  <div class="submetrics">
+    <div class="tile"><div class="tile-num">Phase 1</div><div class="tile-name">Signup &amp; first value</div><div class="tile-metric"><span class="tile-current">42<small>%</small></span><span class="tile-target">/ 70%</span></div><div class="tile-sub">core flow live · empty state next</div><div class="bar"><div style="width:60%; background:var(--moss);"></div></div></div>
+    <div class="tile"><div class="tile-num">Phase 2</div><div class="tile-name">Guided in-app setup</div><div class="tile-metric"><span class="tile-current word">In progress</span></div><div class="tile-sub">checklist live · wizard pending</div><div class="bar"><div style="width:45%; background:var(--amber);"></div></div></div>
+    <div class="tile"><div class="tile-num">Phase 3</div><div class="tile-name">Automated assistance</div><div class="tile-metric"><span class="tile-current word">Blocked</span></div><div class="tile-sub">support-bot vendor API pending</div><div class="bar"><div style="width:15%; background:var(--terra);"></div></div></div>
+    <div class="tile deferred"><div class="tile-num">Phase 4</div><div class="tile-name">Self-improving onboarding</div><div style="margin: 10px 0 4px;"><span class="defer-tag">Deferred</span></div><div class="tile-sub">activates after a stable funnel</div><div class="bar"><div style="width:5%; background:var(--ink-3);"></div></div></div>
+  </div>
+
+  <section class="stage" data-stage="1">
+    <div class="stage-head">
+      <div class="left"><span class="stage-num-badge">Phase 1</span><h3>Signup &amp; first value</h3><span class="stage-pulse">Core signup flow live · refining the empty state for users with no data yet</span><span class="owner">Maya</span></div>
+      <nav class="tabs"><button class="active" data-tab="plan">Plan</button><button data-tab="details">Details</button></nav>
+    </div>
+    <div class="tab-pane active" data-pane="plan">
+      <div class="sequence">
+        <div class="step live"><div class="step-n">Step 1</div><div class="step-name">Email + SSO signup</div><div class="step-status">Live</div><div class="step-meta">Both paths in production</div><div class="owner">Maya</div></div>
+        <div class="step live"><div class="step-n">Step 2</div><div class="step-name">Sample project on first login</div><div class="step-status">Live</div><div class="step-meta">Auto-created from a template</div><div class="owner">Sam</div></div>
+        <div class="step progress"><div class="step-n">Step 3</div><div class="step-name">Interactive product tour</div><div class="step-status">In progress</div><div class="step-meta">3 of 5 steps built</div><div class="owner">Maya</div></div>
+        <div class="step next"><div class="step-n">Step 4</div><div class="step-name">Empty-state prompts</div><div class="step-status">Not started</div><div class="step-meta">Guide users who have no data yet</div></div>
+        <div class="step next"><div class="step-n">Step 5</div><div class="step-name">Activation email sequence</div><div class="step-status">Not started</div><div class="step-meta">Nudge users who stall</div></div>
+      </div>
+      <div class="stage-summary"><div class="now">Now executing: <strong>finish the product tour · design the empty state</strong></div><div class="metric"><span class="big">42%</span><span class="tgt">self-activate today</span></div></div>
+    </div>
+    <div class="tab-pane" data-pane="details">
+      <div class="details-grid">
+        <div class="detail-block"><div class="label">Where it's at</div><ul>
+          <li><strong>Signup</strong> — email + SSO both live; conversion from landing page is healthy.</li>
+          <li><strong>Sample project</strong> — every new account starts with a populated example so the product isn't a blank canvas.</li>
+          <li><strong>Product tour</strong> — 3 of 5 steps built; the last two cover sharing and settings.</li>
+        </ul></div>
+        <div class="detail-block"><div class="label">Next 2 weeks</div><ul>
+          <li>Ship the final 2 tour steps</li>
+          <li>Design the empty state for accounts with no real data yet</li>
+          <li>Draft the activation email sequence for stalled users</li>
+        </ul><div class="label" style="margin-top: 16px;">Watching</div><ul>
+          <li>Drop-off between signup and first project creation</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" data-stage="2">
+    <div class="stage-head">
+      <div class="left"><span class="stage-num-badge">Phase 2</span><h3>Guided in-app setup</h3><span class="stage-pulse">Setup checklist shipped · contextual tooltips in progress · import wizard up next</span><span class="owner">Sam</span></div>
+      <nav class="tabs"><button class="active" data-tab="plan">Plan</button><button data-tab="details">Details</button></nav>
+    </div>
+    <div class="tab-pane active" data-pane="plan">
+      <div class="sequence">
+        <div class="step live"><div class="step-n">Step 1</div><div class="step-name">Setup checklist widget</div><div class="step-status">Live</div><div class="step-meta">Tracks first key actions</div><div class="owner">Sam</div></div>
+        <div class="step progress"><div class="step-n">Step 2</div><div class="step-name">Contextual tooltips</div><div class="step-status">In progress</div><div class="step-meta">Appear on first use of a feature</div><div class="owner">Maya</div></div>
+        <div class="step next"><div class="step-n">Step 3</div><div class="step-name">Import-your-data wizard</div><div class="step-status">Not started</div><div class="step-meta">CSV + common integrations</div><div class="owner">Sam</div></div>
+        <div class="step later"><div class="step-n">Ship</div><div class="step-name">Setup done in &lt; 10 min, unaided</div><div class="step-status">Gated on the wizard</div><div class="step-meta">The done-definition for this stage</div></div>
+      </div>
+      <div class="stage-summary"><div class="now">Now: <strong>finish contextual tooltips, then build the import wizard</strong></div><div class="metric"><span class="big">—</span><span class="tgt">setup-completion metric pending</span></div></div>
+    </div>
+    <div class="tab-pane" data-pane="details">
+      <div class="details-grid">
+        <div class="detail-block"><div class="label">Operating stance</div><ul>
+          <li><strong>Reduce time-to-first-value above all.</strong> Every setup step must earn its place.</li>
+          <li><strong>Tooltips beat a manual.</strong> Teach in context, at the moment of need.</li>
+        </ul></div>
+        <div class="detail-block"><div class="label">Open design calls</div><ul>
+          <li>Which integrations to support first in the import wizard</li>
+          <li>Whether the checklist should be dismissable</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" data-stage="3">
+    <div class="stage-head">
+      <div class="left"><span class="stage-num-badge">Phase 3</span><h3>Automated assistance</h3><span class="stage-pulse">Blocked on the support-bot vendor API · build the rest of the system in the meantime</span><span class="owner">Dana</span></div>
+      <nav class="tabs"><button class="active" data-tab="plan">Plan</button><button data-tab="details">Details</button></nav>
+    </div>
+    <div class="tab-pane active" data-pane="plan">
+      <div class="sequence">
+        <div class="step live"><div class="step-n">Step 1</div><div class="step-name">In-app help search</div><div class="step-status">Live</div><div class="step-meta">Searches docs from inside the app</div><div class="owner">Dana</div></div>
+        <div class="step blocked"><div class="step-n">Step 2</div><div class="step-name">AI answer bot (vendor API)</div><div class="step-status">Blocked</div><div class="step-meta">Vendor API access pending</div><div class="owner">Dana</div></div>
+        <div class="step next"><div class="step-n">Step 3</div><div class="step-name">Auto-triage to a human when stuck</div><div class="step-status">Not started</div><div class="step-meta">Hand off with full context</div><div class="owner">Lee</div></div>
+        <div class="step later"><div class="step-n">Ship</div><div class="step-name">Most questions answered with no human</div><div class="step-status">Gated on the API</div><div class="step-meta">Human as fallback, not first line</div></div>
+      </div>
+      <div class="stage-summary"><div class="now">Now: <strong>secure vendor API access · scope the triage handoff</strong></div><div class="metric"><span class="big">—</span><span class="tgt">gated on vendor API</span></div></div>
+    </div>
+    <div class="tab-pane" data-pane="details">
+      <div class="details-grid">
+        <div class="detail-block"><div class="label">What's blocking</div><ul>
+          <li><strong>No API access yet.</strong> The answer bot needs the vendor's API; access is requested but not granted.</li>
+          <li><strong>De-risk while blocked.</strong> Build help search and triage so only the bot itself waits on the vendor.</li>
+        </ul></div>
+        <div class="detail-block"><div class="label">Working around it</div><ul>
+          <li>Ship in-app help search now (no vendor dependency)</li>
+          <li>Design the human-handoff path so it's ready when the bot lands</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage deferred" data-stage="4">
+    <div class="stage-head">
+      <div class="left"><span class="stage-num-badge">Phase 4</span><h3>Self-improving onboarding</h3><span class="stage-pulse">Deferred · revisit once the funnel is stable and well-instrumented</span><span class="owner">Lee (eventual)</span></div>
+      <nav class="tabs"><button class="active" data-tab="plan">Plan</button><button data-tab="details">Details</button></nav>
+    </div>
+    <div class="tab-pane active" data-pane="plan">
+      <div class="activation"><div><div class="lab">Activation gate</div><div class="gate">Stable funnel + clean analytics</div></div><div class="why">Premature to auto-tune onboarding before there's a reliable funnel to measure against.</div></div>
+      <div class="sequence">
+        <div class="step later"><div class="step-n">Step 1</div><div class="step-name">A/B test onboarding variants</div><div class="step-status">Gated</div><div class="step-meta">Measured on activation rate</div></div>
+        <div class="step later"><div class="step-n">Step 2</div><div class="step-name">Personalize the path by user type</div><div class="step-status">Gated</div><div class="step-meta">Different first-runs per segment</div></div>
+      </div>
+      <div class="stage-summary"><div class="now">Now: <strong>not active — re-prioritize when prerequisites are met</strong></div><div class="metric"><span class="big">—</span><span class="tgt">deferred</span></div></div>
+    </div>
+    <div class="tab-pane" data-pane="details">
+      <div class="details-grid">
+        <div class="detail-block"><div class="label">Why deferred</div><ul><li>Auto-optimization needs a stable funnel and trustworthy analytics first. Punted until both exist.</li></ul></div>
+        <div class="detail-block"><div class="label">Reversibility</div><ul><li>Easy — re-prioritize whenever the prerequisites are met.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-grid">
+    <div class="panel">
+      <h4>Operating principles</h4>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px;"><strong>Phased, no skipping</strong><div style="color: var(--ink-2); font-size: 12px; margin-top: 2px;">Signup &rarr; guided setup &rarr; automated help &rarr; self-improving. Each phase earns the next.</div></li>
+        <li style="padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px;"><strong>Reduce time-to-first-value above all</strong><div style="color: var(--ink-2); font-size: 12px; margin-top: 2px;">Every step in the flow has to move the user closer to their first win.</div></li>
+        <li style="padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px;"><strong>Measure the funnel before automating</strong><div style="color: var(--ink-2); font-size: 12px; margin-top: 2px;">Instrument first; optimize what the data actually shows.</div></li>
+        <li style="padding: 8px 0; font-size: 13px;"><strong>Self-serve first, human as fallback</strong><div style="color: var(--ink-2); font-size: 12px; margin-top: 2px;">A person should be the safety net, not the first line.</div></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4>Onboarding surfaces</h4>
+      <div class="cross-grid">
+        <div class="cross-item"><div class="nm">Product tour<small>3 of 5 steps</small></div><span class="cross-pill progress">Partial</span></div>
+        <div class="cross-item"><div class="nm">Setup checklist<small>Live in-app</small></div><span class="cross-pill built">Live</span></div>
+        <div class="cross-item"><div class="nm">Help search<small>Searches docs in-app</small></div><span class="cross-pill built">Live</span></div>
+      </div>
+    </div>
+    <div class="panel dark"><h4>Maya's focus</h4><ol><li>Ship final 2 product-tour steps</li><li>Design the empty state</li><li>Contextual tooltips</li><li>Watch signup &rarr; first-project drop-off</li></ol></div>
+    <div class="panel dark"><h4>Sam's focus</h4><ol><li>Scope the import-your-data wizard</li><li>Pick first integrations to support</li><li>Iterate on the setup checklist</li></ol></div>
+    <div class="panel full-row">
+      <h4>Recent changes</h4>
+      <ul class="changelog">
+        <li><span class="d">Week 12</span><span>Product tour reached 3 of 5 steps. Setup checklist widget shipped to all new accounts. Started contextual tooltips.</span></li>
+        <li><span class="d">Week 10</span><span>Activation funnel instrumented end-to-end; baseline self-activation measured at 42%. This becomes the north-star metric.</span></li>
+        <li><span class="d">Week 8</span><span>4-phase roadmap locked: signup &rarr; guided setup &rarr; automated assistance &rarr; self-improving.</span></li>
+        <li><span class="d">Week 5</span><span>Sample-project-on-signup shipped — new accounts no longer start on a blank screen.</span></li>
+      </ul>
+    </div>
+  </div>
+  <footer>Source of truth in <code>state.md</code>. Edit there during weekly review, mirror into this file. <strong>(Layout A &middot; Stages &amp; Steps &mdash; sample)</strong></footer>
+</div>
+<script>
+  document.querySelectorAll('.stage').forEach(stage => {
+    const tabs = stage.querySelectorAll('.tabs button');
+    const panes = stage.querySelectorAll('.tab-pane');
+    tabs.forEach(btn => { btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      tabs.forEach(b => b.classList.toggle('active', b === btn));
+      panes.forEach(p => p.classList.toggle('active', p.dataset.pane === tab));
+    }); });
+  });
+</script>
+</body>
+</html>
