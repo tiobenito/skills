@@ -74,5 +74,5 @@ recipient starts with real craft knowledge instead of a blank file.
 
 ## Output
 
-A cleaned skill body the user has signed off on, ready to hand to `skill-creator` for
-restructuring (Step 2 of SKILL.md).
+A cleaned skill body the user has signed off on, ready to restructure into a clean skill
+(Step 2 of SKILL.md — see the structure principles there).
