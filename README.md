@@ -15,6 +15,7 @@ A skill is a folder with a `SKILL.md` (instructions + a `description` that tells
 | **[skill-template](skill-template/)** | Packages an existing skill into a clean, marketplace-ready template and stages it to a repo for publishing — strips internal references, builds an optional guide deck, stops before the push. | "templatize this skill", "make this skill installable" |
 | **[idea-eval](idea-eval/)** | Evaluates a business idea through a 7-stage pipeline and scores it on a weighted 8-criteria rubric. Lists, views, and re-scores ideas; persists to local files or a GitHub repo. | "score this idea", "validate this idea", "list ideas" |
 | **[project-roadmap](project-roadmap/)** | Point it at a project folder and it builds a living, single-page HTML roadmap — harvests your existing docs, infers stages/steps/owners/status, asks only about real gaps, then renders a self-contained dashboard you host at one stable URL and refresh weekly. Three layouts, three themes. | "build a roadmap", "turn my project into a dashboard", "create a living roadmap" |
+| **[build-ai-manager](build-ai-manager/)** | Interviews you about an AI agent or workflow you've already built — its goal, guardrails, data sources, cadence — then generates a second, standalone skill that reviews it on demand: ranks findings by how much they'd move the goal (not by raw count) and attaches a fix to every one. | "build me an AI manager for my agent", "set up oversight for this workflow", "review my agent against its goal" |
 
 ## Install
 
@@ -24,7 +25,7 @@ These are plain skill folders — no build step, no plugin manager required.
 
 ```bash
 git clone https://github.com/tiobenito/skills.git
-cp -r skills/{visualization,cc-level-up,skill-template,idea-eval,project-roadmap} ~/.claude/skills/
+cp -r skills/{visualization,cc-level-up,skill-template,idea-eval,project-roadmap,build-ai-manager} ~/.claude/skills/
 ```
 
 **Grab just one:**
