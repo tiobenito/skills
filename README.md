@@ -17,6 +17,10 @@ A skill is a folder with a `SKILL.md` (instructions + a `description` that tells
 | **[project-roadmap](project-roadmap/)** | Point it at a project folder and it builds a living, single-page HTML roadmap — harvests your existing docs, infers stages/steps/owners/status, asks only about real gaps, then renders a self-contained dashboard you host at one stable URL and refresh weekly. Three layouts, three themes. | "build a roadmap", "turn my project into a dashboard", "create a living roadmap" |
 | **[build-ai-manager](build-ai-manager/)** | Interviews you about an AI agent or workflow you've already built — its goal, guardrails, data sources, cadence — then generates a second, standalone skill that reviews it on demand: ranks findings by how much they'd move the goal (not by raw count) and attaches a fix to every one. | "build me an AI manager for my agent", "set up oversight for this workflow", "review my agent against its goal" |
 
+## How this repo is maintained
+
+These are published snapshots. The working versions of `visualization` and `cc-level-up` live in a private setup and carry context that is specific to one person; the copies here are the general-purpose versions, re-published from time to time. If a skill here looks behind, open an issue and it gets refreshed.
+
 ## Install
 
 These are plain skill folders — no build step, no plugin manager required.
